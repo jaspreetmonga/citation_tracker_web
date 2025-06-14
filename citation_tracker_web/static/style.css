@@ -1,0 +1,15 @@
+
+body {
+    font-family: Verdana, sans-serif;
+    margin: 30px;
+}
+input, button {
+    margin: 10px 0;
+    padding: 6px 8px;
+}
+#visual-area {
+    margin-top: 20px;
+    width: 100%;
+    height: 600px;
+    border: 1px solid #ccc;
+}
