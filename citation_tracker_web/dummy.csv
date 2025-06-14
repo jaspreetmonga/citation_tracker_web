@@ -1,0 +1,6 @@
+title,authors,journal,year,citations
+Deep Learning for NLP,"Alice Smith, Bob Lee",Journal of AI,2021,Graph Neural Networks
+Graph Neural Networks,Carol Wang,GraphConf,2020,
+Transformers in Vision,"David Miller, Alice Smith",CVPR,2022,Deep Learning for NLP
+AI for Healthcare,Eva Chen,HealthAI,2023,"Deep Learning for NLP, Transformers in Vision"
+Neural Symbolic Learning,"Bob Lee, George King",NeuroSymbolics,2021,Graph Neural Networks
