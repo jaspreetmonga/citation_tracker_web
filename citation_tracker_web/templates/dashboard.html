@@ -3,174 +3,152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Academic Citation Visualizer</title>
+  <title>Group: 80 - Academic Citation Visualizer</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 30px auto;
-      max-width: 900px;
-      padding: 0 15px;
+      font-family: 'Inter', sans-serif;
       background: #f9fafb;
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 1200px;
       color: #222;
     }
     h2 {
       text-align: center;
-      margin-bottom: 25px;
-      color: #1976D2;
-    }
-
-    form {
-      background: white;
-      padding: 16px 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
       margin-bottom: 30px;
-      font-size: 14px;
-    }
-
-    /* Compact horizontal label + input layout */
-    .form-row {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .form-row label {
-      flex: 0 0 130px; /* fixed label width */
+      color: #1976D2;
       font-weight: 600;
-      color: #555;
-      margin-right: 12px;
-      white-space: nowrap;
     }
-
+    .container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+    .left-panel, .right-panel {
+      flex: 1;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .form-row {
+      margin-bottom: 14px;
+    }
+    .form-row label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #444;
+    }
     .form-row input[type="text"],
     .form-row input[type="number"],
     .form-row input[type="file"] {
-      flex: 1;
-      padding: 6px 10px;
+      width: 100%;
+      padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 13px;
-      box-sizing: border-box;
-      height: 28px;
-      transition: border-color 0.2s ease;
+      font-size: 14px;
     }
-
-    .form-row input[type="text"]:focus,
-    .form-row input[type="number"]:focus,
-    .form-row input[type="file"]:focus {
-      outline: none;
-      border-color: #1976D2;
-      box-shadow: 0 0 4px #1976D2aa;
-    }
-
-    /* For file upload, label on top since file input can't be put in flex nicely */
-    #upload-form label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #555;
-    }
-
-    #upload-form input[type="file"] {
-      width: 100%;
-      margin-bottom: 12px;
-      padding: 6px 10px;
-      height: auto;
-    }
-
-    form button {
+    button {
       background-color: #1976D2;
       color: white;
-      padding: 10px 20px;
+      padding: 10px 16px;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s ease;
       font-size: 14px;
-      display: inline-block;
     }
-    form button:hover {
-      background-color: #145a9e;
+    button:hover {
+      background-color: #125ea6;
     }
-
+    #search-box {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
     #visual-area {
+      margin-top: 30px;
       background: white;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 12px rgb(0 0 0 / 0.1);
-      padding: 15px;
-      min-height: 600px;
     }
-
-    /* Responsive tweaks */
-    @media (max-width: 600px) {
-      form {
-        padding: 15px 18px;
-        font-size: 13px;
-      }
-      .form-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .form-row label {
-        margin-bottom: 4px;
-        width: 100%;
-      }
-      .form-row input[type="text"],
-      .form-row input[type="number"],
-      .form-row input[type="file"] {
-        width: 100%;
-      }
-      form button {
-        width: 100%;
-        padding: 14px;
-      }
+    #query-results {
+      margin-top: 15px;
+      font-size: 14px;
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .right-panel input[type="text"] {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
-  <h2>Academic Citation Visualizer</h2>
+  <h2>Group: 80 - Academic Citation Visualizer</h2>
 
-  <form id="entry-form" autocomplete="off">
-    <div class="form-row">
-      <label for="title">Paper Title</label>
-      <input type="text" id="title" name="title" placeholder="Enter paper title" required />
+  <div class="container">
+    <!-- Left panel: Form inputs -->
+    <div class="left-panel">
+      <form id="entry-form" autocomplete="off">
+        <div class="form-row">
+          <label for="title">Paper Title</label>
+          <input type="text" id="title" name="title" placeholder="Enter paper title" required />
+        </div>
+        <div class="form-row">
+          <label for="authors">Authors (comma-separated)</label>
+          <input type="text" id="authors" name="authors" placeholder="E.g., Alice Smith, Bob Lee" required />
+        </div>
+        <div class="form-row">
+          <label for="journal">Journal Name</label>
+          <input type="text" id="journal" name="journal" placeholder="Journal of AI" required />
+        </div>
+        <div class="form-row">
+          <label for="year">Year of Publication</label>
+          <input type="number" id="year" name="year" placeholder="2023" min="1900" max="2100" />
+        </div>
+        <div class="form-row">
+          <label for="citations">Cited Papers</label>
+          <input type="text" id="citations" name="citations" placeholder="E.g., Paper A, Paper B" />
+        </div>
+        <button type="submit">Add Paper</button>
+      </form>
+
+      <form id="upload-form" enctype="multipart/form-data" style="margin-top: 20px;">
+        <label for="file-upload">Upload Dataset (CSV or JSON)</label>
+        <input type="file" id="file-upload" name="file" accept=".csv, .json" required />
+        <button type="submit" style="margin-top: 10px;">Upload File</button>
+      </form>
     </div>
 
-    <div class="form-row">
-      <label for="authors">Authors (comma-separated)</label>
-      <input type="text" id="authors" name="authors" placeholder="E.g., Alice Smith, Bob Lee" required />
+    <!-- Right panel: Query options -->
+    <div class="right-panel">
+      <h4>Run Queries</h4>
+      <input id="author-query" type="text" placeholder="Author name">
+      <input id="citation-query" type="text" placeholder="Title of cited paper">
+      <input id="chain-query" type="text" placeholder="Start paper for chain">
+      <button id="query-button" style="margin-top: 10px;">Run Query</button>
+      <button onclick="resetGraph()" style="margin-top: 8px;">Reset</button>
+      <div id="query-results"></div>
     </div>
-
-    <div class="form-row">
-      <label for="journal">Journal Name</label>
-      <input type="text" id="journal" name="journal" placeholder="Journal of AI" required />
-    </div>
-
-    <div class="form-row">
-      <label for="year">Year of Publication</label>
-      <input type="number" id="year" name="year" placeholder="2023" min="1900" max="2100" />
-    </div>
-
-    <div class="form-row">
-      <label for="citations">Cited Papers</label>
-      <input type="text" id="citations" name="citations" placeholder="E.g., Paper A, Paper B" />
-    </div>
-
-    <button type="submit">Add Paper</button>
-  </form>
-
-  <form id="upload-form" enctype="multipart/form-data">
-    <label for="file-upload">Upload Dataset (CSV or JSON)</label>
-    <input type="file" id="file-upload" name="file" accept=".csv, .json" required />
-    <button type="submit">Upload File</button>
-  </form>
+  </div>
 
   <div id="visual-area"></div>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
-</html>
+</html><!DOCTYPE html>

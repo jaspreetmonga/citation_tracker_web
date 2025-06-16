@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\jaspr\OneDrive\Desktop\New folder\citation_tracker_web\venv
+set VIRTUAL_ENV=C:\Users\jaspr\OneDrive\Desktop\NLP_Application_Project\citation_tracker_web\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

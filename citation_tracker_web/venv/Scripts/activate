@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\jaspr\OneDrive\Desktop\New folder\citation_tracker_web\venv"
+VIRTUAL_ENV="C:\Users\jaspr\OneDrive\Desktop\NLP_Application_Project\citation_tracker_web\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
