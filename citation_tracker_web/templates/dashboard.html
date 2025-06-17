@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Group: 80 - Academic Citation Visualizer</title>
+  <title>Group 80 : Academic Citation Visualizer</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -99,7 +99,7 @@
   </style>
 </head>
 <body>
-  <h2>Group: 80 - Academic Citation Visualizer</h2>
+  <h2>Group 80 : Academic Citation Visualizer</h2>
 
   <div class="container">
     <!-- Left panel: Form inputs -->
@@ -110,16 +110,16 @@
           <input type="text" id="title" name="title" placeholder="Enter paper title" required />
         </div>
         <div class="form-row">
-          <label for="authors">Authors (comma-separated)</label>
-          <input type="text" id="authors" name="authors" placeholder="E.g., Alice Smith, Bob Lee" required />
+          <label for="authors">Authors</label>
+          <input type="text" id="authors" name="authors" placeholder="Enter Author Names (separated by commas)" required />
         </div>
         <div class="form-row">
           <label for="journal">Journal Name</label>
-          <input type="text" id="journal" name="journal" placeholder="Journal of AI" required />
+          <input type="text" id="journal" name="journal" placeholder="Enter the Journal Name" required />
         </div>
         <div class="form-row">
           <label for="year">Year of Publication</label>
-          <input type="number" id="year" name="year" placeholder="2023" min="1900" max="2100" />
+          <input type="number" id="year" name="year" placeholder="Enter Year" min="1900" max="2100" />
         </div>
         <div class="form-row">
           <label for="citations">Cited Papers</label>
