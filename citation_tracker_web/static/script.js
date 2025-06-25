@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const exportBtn = document.createElement('button');
   exportBtn.textContent = 'Export as PNG';
-  exportBtn.style.cssText = 'position:absolute; top:15px; right:20px; z-index:10; padding:6px 12px; font-size:13px;';
+  exportBtn.style.cssText = 'position:absolute; top:700px; right:400px; z-index:10; padding:6px 12px; font-size:13px;';
   exportBtn.onclick = () => {
     const svg = document.querySelector('#visual-area svg');
     const svgData = new XMLSerializer().serializeToString(svg);
@@ -132,7 +132,7 @@ async function drawGraph() {
 
   d3.select("#visual-area").selectAll("*").remove();
 
-  const width = 960, height = 650;
+  const width = 960, height = 780;
 
   const svg = d3.select("#visual-area")
     .append("svg")
